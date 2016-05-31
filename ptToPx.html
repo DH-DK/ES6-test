@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/lib/semantic.min.css" />
+		<script src="js/lib/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/lib/semantic.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style type="text/css">
+		body{
+			overflow: hidden;
+		}
+		#todo {
+			width: 800px;
+			margin: 50px auto 0;
+		}
+		
+	</style>
+
+	<body>
+		<div class="ui grid" id="todo">
+			<div class="row">
+				<div class="three wide column">
+					<div class="ui  input">
+						<label> 取值方式： </label>
+					</div>
+				</div>
+				<div class="three wide column">
+					<div class="ui disabled selection dropdown">
+						<input type="hidden" name="math_type">
+						<i class="dropdown icon"></i>
+						<div class="text">暂不支持</div>
+						<div class="menu">
+							<div class="item" data-value="0">向下取值</div>
+							<div class="item" data-value="1">向上取值</div>
+							<div class="item" data-value="2">近似精确值</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="sixteen wide column">
+					<div class="ui header">
+						1 cm = 96/2.54 ≈ 37.80 px ≈ 28.35 pound , 1 px = 2.54/96 ≈ 0.0265 cm ≈ 0.751275 pound, 1 pound ≈ 0.03527 cm  ≈ 1.333206 px。
+					</div>
+				</div>
+			</div>
+			<div class="three column row my-action">
+				<div class="column">
+					<div class="ui labeled input">
+						<div class="ui label"> pound </div>
+						<input type="text" name="pound" value="" >
+					</div>
+				</div>
+				<div class="column">
+					<div class="ui labeled input">
+						<div class="ui label"> cm </div>
+						<input type="text" name="cm" value="">
+					</div>
+				</div>
+				<div class="column">
+					<div class="ui labeled input">
+						<div class="ui label"> px </div>
+						<input type="text" name="px" value="">
+					</div>
+				</div>				
+			</div>
+		</div>
+		<script type="text/javascript">
+			$('.dropdown').dropdown();			
+			var transformObj = {
+				'cm': {	'px': 37.80, 'pound': 28.35,},
+				'pound': {'cm': 0.03527,	'px': 0.03527 * 37.80},
+				'px': {'cm': 0.0265,	'pound': 0.0265 * 28.35}
+			};/*和cm兑换*/
+			var typeArr = [parseInt,Math.ceil,Math.floor,Math.round];
+			$('.my-action .input input').change(function(){
+				var $row = $(this).parents('.my-action');
+				var $pound = $row.find('input[name="pound"]'),$px = $row.find('input[name="px"]'),$cm = $row.find('input[name="cm"]');
+				var _type = $(this).attr('name');
+				var _val = $(this).val();
+				for(var x in transformObj[_type]){
+					$row.find('input[name="'+ x +'"]').val(transformObj[_type][x] * _val);
+				};
+			});
+		</script>
+	</body>
+
+</html>

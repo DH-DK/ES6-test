@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/lib/semantic.min.css"/>
+		<script src="js/lib/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style type="text/css">
+		code{
+			display: block;
+			width: 800px;
+			height: auto;
+			word-wrap: break-word;
+			margin: 30px auto;
+		}
+	</style>
+
+	<body>
+		<code>
+			
+		</code>
+		<script type="text/javascript">
+			var arr = ['account', 'goods', 'label', 'order', 'partner', 'store', 'template'];
+			var obj = {};
+			var strm = 'main_';
+			var stru = 'main/admin/';
+			arr.forEach(function(val){
+				obj[strm + val] = stru + val;
+			});
+			$('code').html(JSON.stringify(obj));
+		</script>
+	</body>
+
+</html>
