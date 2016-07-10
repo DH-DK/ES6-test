@@ -1,75 +1,86 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-		<link rel="stylesheet" type="text/css" href="css/lib/semantic.min.css" />
-		<script src="js/lib/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/lib/semantic.min.js" type="text/javascript" charset="utf-8"></script>
-	</head>
-	<style type="text/css">
-		#todo {
-			width: 800px;
-			margin: 50px auto 0;
-		}
-		#todo code,#todo textarea{
-			display: block;
-			width: 100%;
-			height: 400px;
-			max-height: 400px;
-			padding: 10px;
-			box-shadow: 0px 0px 4px rgba(3,3,3,.2);
-			box-sizing: border-box;
-			background-color: #fff;
-			overflow: auto;
-		}
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/lib/semantic.min.css"/>
+    <script src="js/lib/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/lib/semantic.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<style type="text/css">
+    #todo {
+        width: 800px;
+        margin: 50px auto 0;
+    }
 
-	</style>
+    #todo code {
+        display: block;
+        width: 100%;
+        height: 400px;
+        max-height: 400px;
+        padding: 10px;
+        box-shadow: 0px 0px 4px rgba(3, 3, 3, .2);
+        box-sizing: border-box;
+        background-color: #fff;
+        overflow: auto;
+    }
+    #todo code.todo-input{
+        height: 190px;
+    }
+    #todo code.todo-input:nth-child(1){
+        margin-bottom: 20px;
+    }
+</style>
 
-	<body>
-		<div class="ui grid" id="todo">
-			<div class="one column row">
-				<div class="column center aligned">
-						暂时只支持数组,分割方式为逗号／空格／回车	（由于谷歌不支持toSource()函数，所以只能在火狐下执行）	
-				</div>
-			</div>
-			<div class="two column row">
-				<div class="column ui form"><!--contenteditable="true"-->
-					<textarea class="todo-input"></textarea>
-			
-				</div>
-				<div class="column  ui form">
-					<code class="todo-output">
-						shengcheng
-					</code>			
-				</div>
-			</div>	
-			<div class="three column row">
-				<div class="column"> </div>
-				<div class="column center aligned">
-						<button class="ui teal  button">生成</button>	
-						<!--<button class="ui black fluid button">清空</button>-->
-						<button class="ui black  button">清空</button>
-				</div>
-			</div>
-		</div>
-		<script type="text/javascript">
-			$('.teal.button').click(function(){
-				var _regexp = /\s/;
-				var _val = $('.todo-input').val();				
-				var _result = _val.split(_regexp);console.log(_result);
-				$('.todo-output').text(_result.toSource());
-			});
-			$('.black.button').click(function(){
-				$('.todo-output').html('');
-			});
-			if(undefined){
-				alert(1)
-			}else{
-				alert(2)
-			}
-		</script>
-	</body>
+<body>
+<div class="ui grid" id="todo">
+    <div class="one column row">
+        <div class="column center aligned">
+            ["a","b"] + {"${key}": "xxx","asd": "xxx"} => [{"a": "xxx","asd": "xxx"},{"b":"xxx","asd": "xxx"}]<br/>
+            ["a","b"] + {"title": "xxx","data": "${key}"} => [{"title": "xxx","data": "${key}"},{"title": "xxx","data": "${key}"}]<br/>
+
+        </div>
+    </div>
+    <div class="two column row">
+        <div class="column ui form">
+            <code class="todo-input" contenteditable="true">
+
+            </code>
+            <code class="todo-input" contenteditable="true">
+
+            </code>
+        </div>
+        <div class="column  ui form">
+            <code class="todo-output">
+
+            </code>
+        </div>
+    </div>
+    <div class="three column row">
+        <div class="column"></div>
+        <div class="column center aligned">
+            <button class="ui teal  button">生成</button>
+            <button class="ui black  button">清空</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(".teal.button").click(function () {
+        var _arr = $.trim($(".todo-input").eq(0).text());
+        _arr = JSON.parse(_arr);
+        var _format = $.trim($(".todo-input").eq(1).text());
+        var _result = _arr.map(function(one){
+            return JSON.parse(_format.replace("${key}",one));
+        });
+        console.log(_result)
+        $(".todo-output").text(JSON.stringify(_result,null,4));
+    });
+    $(".black.button").click(function () {
+        $(".todo-output").html("");
+        $(".todo-input").html("");
+    });
+</script>
+</body>
 
 </html>
