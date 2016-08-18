@@ -1,0 +1,9 @@
+function getArr(str){
+	return str.split(' ').map((item,i)=>{
+		return {
+	        "title": item,
+	        "dataIndex": "field",
+	        "key": "field" + i,
+	      }
+	})
+}
