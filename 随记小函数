@@ -7,7 +7,7 @@ function getArr(str){
 	        "key": "field" + i,
 	      }
 	})
-}
+};
 JSON.stringify(getArr('工号 姓名 手机号 岗位 在职状态 入职时间 操作'))
 
 //生成require 
