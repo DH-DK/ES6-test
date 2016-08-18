@@ -1,3 +1,4 @@
+//生成columns
 function getArr(str){
 	return str.split(' ').map((item,i)=>{
 		return {
@@ -8,3 +9,6 @@ function getArr(str){
 	})
 }
 JSON.stringify(getArr('工号 姓名 手机号 岗位 在职状态 入职时间 操作'))
+
+//生成require 
+'area.js knight_check_log.js partner.js staff.js employee_list.js knight_check.js knight_list.js product_setup.js'.split(' ').map(i=> {return 'require(\'./'+i+'\')'}).join(',')
