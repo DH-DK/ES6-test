@@ -21,3 +21,15 @@ function getOption(str) {
   });
   return JSON.stringify(_r);
 };
+
+
+//小于300的24个
+function get300Num() {
+	let n=24,_r = [], _t = null;
+	while(n){
+		_t = Math.random()*300;
+		_r.push(_t.toFixed(2)*1);
+		n--;
+	}
+	return JSON.stringify(_r);
+}
