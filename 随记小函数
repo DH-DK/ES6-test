@@ -33,3 +33,7 @@ function get300Num() {
 	}
 	return JSON.stringify(_r);
 }
+
+
+//数组倒序
+[].reverse()
