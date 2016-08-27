@@ -35,5 +35,6 @@ function get300Num() {
 }
 
 
-//数组倒序
+//数组倒序 合成require
 [].reverse()
+['parnter_wallet',"parnter_bills","courier_bills"].map(item => `require(\'./${item}.js\')`).toString()
