@@ -38,3 +38,22 @@ function get300Num() {
 //数组倒序 合成require
 [].reverse()
 ['parnter_wallet',"parnter_bills","courier_bills"].map(item => `require(\'./${item}.js\')`).toString()
+
+
+//create babel plugin install 
+let obdd = {
+  "presets": ["es2015", "react", "stage-2", "stage-3"],
+  "plugins": [
+    "transform-runtime",
+    "transform-strict-mode",
+    "transform-es2015-modules-commonjs",
+    "transform-es2015-spread",
+    "transform-es2015-destructuring",
+    "transform-es2015-parameters",
+    "syntax-async-functions",
+    "transform-async-to-generator",
+    "syntax-export-extensions",
+    "transform-es2015-spread"
+  ]
+}
+let arrpl=[];for(let onb in obdd){obdd[onb].forEach(item => {arrpl.push(`babel-plugin-${item}`)})}
