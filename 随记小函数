@@ -56,4 +56,11 @@ let obdd = {
     "transform-es2015-spread"
   ]
 }
-let arrpl=[];for(let onb in obdd){obdd[onb].forEach(item => {let _type = onb === 'presets' ? 'preset' : 'plugin';arrpl.push(`babel-plugin-${item}`)})}
+let arrpl=[];
+for(let onb in obdd){
+   let _type = onb === 'presets' ? 'preset' : 'plugin';
+   obdd[onb].forEach(item => {
+      arrpl.push(`babel-${_type}-${item}`);
+   })
+}
+arrpl.join(' ')
