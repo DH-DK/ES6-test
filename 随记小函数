@@ -64,3 +64,22 @@ for(let onb in obdd){
    })
 }
 arrpl.join(' ')
+
+
+
+//MDN 抓取Conversion_getter 方法
+let _r = [];
+$('#Conversion_getter+dl dt code').each(function(){
+  _r.push($(this).text().replace('()','').split('.').pop());	
+});
+let _d = new Date();
+_r.forEach((item, index)=>{
+  let txt = 'error'
+  try {
+   txt = _d[item]()
+  } 
+  catch(e) {
+  
+  }
+  console.log(item, index,'=>  ',txt)
+})
