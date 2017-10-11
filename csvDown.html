@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>csv</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <section id="content">
+    <a id="csv" href="data:text/txt;charset=utf-8; col1,col2,col3\nvalue1,value2,value3" download="test.csv">downCSV</a>
+  </section>
+  <script>
+    let $csv = document.querySelector('#csv')
+    const radomNum = (num) => {
+      return (Math.random() * num).toFixed(0) * 1
+    }
+    let alarm_all = {
+      title: '各监测点告警分析',
+      content: Array.apply(null, {
+        length: 10
+      }).map((a, i) => {
+        return {
+          name: `监测点${i + 1}`,
+          value: 100 + radomNum(200) + radomNum(3000)
+        }
+      })
+    }
+    let alarm_inner = {
+      title: '监测点1内告警分析',
+      content1: [{
+          name: '移动',
+          value: '1232'
+        },
+        {
+          name: '联通',
+          value: '1231'
+        },
+        {
+          name: '电信',
+          value: '4432'
+        },
+      ],
+      content2: [{
+          name: '新疆',
+          value: '123'
+        },
+        {
+          name: '西藏',
+          value: '343'
+        },
+        {
+          name: '海南',
+          value: '24'
+        },
+        {
+          name: '四川',
+          value: '232'
+        },
+        {
+          name: '重庆',
+          value: '121'
+        },
+        {
+          name: '其他',
+          value: '324'
+        },
+      ]
+    }
+    const defaultData = {
+      xAxis: [
+        '2017/9/27 19:16',
+        '2017/9/28 19:16',
+        '2017/9/29 19:16',
+        '2017/9/30 19:16',
+        '2017/10/1 19:16',
+        '2017/10/2 19:16',
+        '2017/10/3 19:16',
+        '2017/10/4 19:16',
+        '2017/10/5 19:16',
+        '2017/10/6 19:16',
+        '2017/10/7 19:16',
+      ],
+      content: Array.apply(null, {
+        length: 10
+      }).map((a, i) => {
+        return {
+          name: `监测点${i + 1}`,
+          data: Array.apply(null, {
+            length: 10
+          }).map(i => 10 + radomNum(50))
+        }
+      })
+    }
+    let net_pcroom_delay = {
+      title: '各监测点全国网络质量,（移动/延时ms/均值）',
+      ...defaultData
+    }
+    let net_pcroom_loss = {
+      title: '各监测点全国网络质量,（移动/丢包率%/均值）',
+      ...defaultData
+    }
+    let net_ips_delay = {
+      title: '各运营商全国网络质量,（移动/延时ms/均值）',
+      ...defaultData
+    }
+    let net_ips_loss = {
+      title: '各运营商全国网络质量,（移动/丢包率%/均值）',
+      ...defaultData
+    }
+    let 
+    const rowSymbol = encodeURIComponent('\n')
+    const csvHead = 'data:text/csv;charset=utf-8,\ufeff'
+    const collectData = (data) => {
+      let table = {
+        thead: [],
+        tbody: []
+      }
+      data.forEach(({
+        name,
+        value
+      }) => {
+        table.thead.push(name)
+        table.tbody.push(value)
+      })
+      return table
+    }
+    const createContent = ({
+      thead,
+      tbody
+    }) => {
+      return [thead.join(','), tbody.join(',')].join(rowSymbol)
+    }
+    let result = createContent(collectData(sourceData.content))
+    $csv.href = csvHead + result
+  </script>
+</body>
+
+
+</html>
