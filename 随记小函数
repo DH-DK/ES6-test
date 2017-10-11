@@ -85,6 +85,7 @@ _r.forEach((item, index)=>{
 })
 
 // 进阶字符串模板
+var str = 'field1: ${field1}, field2: ${field2}', field3: ${field3 | filter1 | filter2 | ...}';
 function strTemplate(tempalte, data, dict) {
     // 正则替换
     let result = tempalte.replace(/\$\{(\S*)\}/g, function(word, field){
