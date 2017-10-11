@@ -84,5 +84,23 @@ _r.forEach((item, index)=>{
   console.log(item, index,'=>  ',txt)
 })
 
+// 进阶字符串模板
+function strTemplate(tempalte, data, dict) {
+    // 正则替换
+    let result = tempalte.replace(/\$\{(\S*)\}/g, function(word, field){
+        let fields = field.replace(/\s/g, '').split('|')
+        if(fields.length === 1) {
+            return data[field]
+        }
+        // 含过滤器 替换第一个值 这样就对上了
+        fields[0] = data[fields[0]]
+        // 归并取值
+        let result = fields.reduce((total, currField) => {
+        return total[currField]
+        }, dict)
+    })
+    return result
+}
+
 
 
