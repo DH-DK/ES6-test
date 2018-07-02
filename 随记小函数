@@ -104,4 +104,6 @@ function strTemplate(tempalte, data, dict) {
 }
 
 
+// 替换汉字
+str.replace(/[\u4e00-\u9fa5]/g, 'aa')
 
