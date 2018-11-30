@@ -34,12 +34,12 @@ var csvData2 = arr.filter(item => {
 var createCsv = (data, text) => {
     const a = document.createElement('a');
     a.download = 'month-1.csv';
-    let str = data.map((item => `${item.date},${item.label},${item.start_time},${item.end_time},${['六', '日'].indexOf(item.label) !== -1 ? 60 : 30}`)).join('\n');
+    let str = data.map(((item, index) => `${['六', '日'].indexOf(item.label) !== -1 ? '周末加班餐' : '加班餐'},${index + 1},${item.date},${item.label},${item.start_time},${item.end_time},${['六', '日'].indexOf(item.label) !== -1 ? 60 : 30}`)).join('\n');
     let total = data.reduce((all, item) => {
         let _num = ['六', '日'].indexOf(item.label) !== -1 ? 60 : 30;
         return all + _num;
     }, 0);
-    str += `\n总计,,,,${total}`
+    str += `\n总计,,,,,,${total}`
     a.href="data:text/csv;charset=utf-8,\uFEFF" + encodeURI(str);
     a.text = text || '下载csv'
     $('body').append($(a))
